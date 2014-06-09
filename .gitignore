@@ -3,3 +3,5 @@ stacktrace.log
 reports
 target
 .idea
+.DS_Store
+*.iml

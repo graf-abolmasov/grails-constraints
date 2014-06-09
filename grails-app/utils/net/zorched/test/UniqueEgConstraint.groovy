@@ -1,11 +1,11 @@
 package net.zorched.test
 
-import org.codehaus.groovy.grails.commons.DomainClassArtefactHandler;
+import org.codehaus.groovy.grails.commons.DomainClassArtefactHandler
+import org.codehaus.groovy.grails.orm.hibernate.GrailsHibernateTemplate;
 import org.hibernate.Criteria;
 import org.hibernate.FlushMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.orm.hibernate3.HibernateCallback;
 
 class UniqueEgConstraint {
     
@@ -36,7 +36,7 @@ class UniqueEgConstraint {
     
     def validate = { propertyValue -> 
         dbCall.delegate = delegate                                  // To make things like constraintOwningClass available above
-        def _v = dbCall.curry(propertyValue) as HibernateCallback   // curry the passed value and then coerce to a HibernateCallback
+        def _v = dbCall.curry(propertyValue) as GrailsHibernateTemplate.HibernateCallback   // curry the passed value and then coerce to a HibernateCallback
         def result = hibernateTemplate.executeFind(_v)
         
         return result ? false : true    // If we find a result, then non-unique

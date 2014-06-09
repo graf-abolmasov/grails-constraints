@@ -17,9 +17,9 @@ package net.zorched.grails.plugins.validation;
 import grails.util.GrailsNameUtils;
 import groovy.lang.Closure;
 import org.codehaus.groovy.grails.commons.AbstractInjectableGrailsClass;
+import org.codehaus.groovy.grails.orm.hibernate.GrailsHibernateTemplate;
 import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import java.util.List;
 import java.util.Map;
@@ -94,7 +94,7 @@ public class DefaultGrailsConstraintClass extends AbstractInjectableGrailsClass 
      */
     public void setHibernateTemplate(ApplicationContext applicationContext) {
         if (applicationContext.containsBean("sessionFactory")) {
-            HibernateTemplate template = new HibernateTemplate((SessionFactory) applicationContext.getBean("sessionFactory"),true);
+            GrailsHibernateTemplate template = new GrailsHibernateTemplate((SessionFactory) applicationContext.getBean("sessionFactory"), grailsApplication);
             getMetaClass().invokeMethod(getReferenceInstance(), "setHibernateTemplate", template);
         }
     }
